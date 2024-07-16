@@ -1,6 +1,7 @@
-import { AppBar, Avatar, Button, ButtonGroup, Grid, TextField, Toolbar } from "@mui/material"
+import { AppBar, Avatar, Button, ButtonGroup, Grid, Toolbar } from "@mui/material"
 import { useLocation } from "react-router-dom"
 import { useState } from "react"
+
 import SearchButton from "../../components/SearchButton"
 
 const Header = () => {

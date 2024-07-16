@@ -1,8 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Inbox from "./pages/inbox/Inbox";
 import LogIn from "./pages/Login";
-import SendEmail from "./pages/SendEmail"
-import { createTheme, MantineProvider } from '@mantine/core';
 import SignUp from "./pages/SignUp";
 
 function App() {
@@ -17,7 +15,7 @@ function App() {
         } path="/SignUp" />
         <Route element={
           <Inbox />
-        } path="/user/:name" />
+        } path="/user/:id" />
       </Routes>
       {/* <Inbox /> */}
     </div >

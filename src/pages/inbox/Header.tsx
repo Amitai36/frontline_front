@@ -3,9 +3,17 @@ import { useLocation } from "react-router-dom"
 import { useState } from "react"
 
 import SearchButton from "../../components/SearchButton"
+import SendEmail from "../SendEmail"
 
-const Header = () => {
+
+interface HeaderProps {
+    refetch: () => void
+}
+
+const Header = (props: HeaderProps) => {
+    const { refetch } = props
     const [search, setSearch] = useState('')
+    const [sendEmail, setSendEmail] = useState(false)
     const { state: { name, lastName } } = useLocation()
 
     return <>
@@ -30,7 +38,7 @@ const Header = () => {
                         <SearchButton value={search} setValue={setSearch} handleSearch={() => console.log("hi")} />
                     </Grid>
                     <Grid item xs={1} width={"100%"}>
-                        <Button>new Email</Button>
+                        <Button onClick={() => setSendEmail(prev => !prev)}>new Email</Button>
                     </Grid>
                     <Grid item xs={1}>
                         <Avatar>{name[0]}{lastName[0]}</Avatar>
@@ -38,6 +46,8 @@ const Header = () => {
                 </Grid>
             </Toolbar>
         </AppBar>
+        <SendEmail refech={refetch} setValue={setSendEmail} value={sendEmail} />
+
     </>
 }
 export default Header

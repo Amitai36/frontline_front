@@ -18,8 +18,15 @@ const SignUpForm = () => {
     const handleClick = () => {
         signUp.mutate({ email, firstName, lastName, password }, {
             onSuccess: (data) => {
-                console.log("sign up", data.data)
-                navigate(`/user/${data.data._id}`)
+                const { _id, email, last_name, name } = data.data
+                console.log(_id, email, last_name, name)
+                navigate(`/user/${_id}`, {
+                    state: {
+                        name: name,
+                        lastName: last_name,
+                        email
+                    }
+                })
             }
         })
     }
@@ -41,7 +48,7 @@ const SignUpForm = () => {
         <Grid item xs={12}>
             <PassWordButton title="repeat password" setValue={setRepeatPassword} value={repeatPassword} />
         </Grid>
-        <Button disabled={(!email || !password || !repeatPassword || !firstName || !lastName) || (repeatPassword !== password) || (!/[A-Za-z0-9\._%+\-]+@[A-Za-z0-9\.\-]+\.[A-Za-z]{2,}/.test(email))} variant="contained" onClick={handleClick}>Sign Up</Button>
+        <Button disabled={(!email || !password || !repeatPassword || !firstName || !lastName) || (repeatPassword !== password)} variant="contained" onClick={handleClick}>Sign Up</Button>
     </Grid>
 }
 export default SignUpForm

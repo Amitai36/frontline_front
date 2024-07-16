@@ -1,20 +1,21 @@
-import { Grid } from "@mui/material"
+import { Grid, Typography } from "@mui/material"
 
 
 import Side from "./Side"
 import Header from "./Header"
 import Content from "./Content"
 import { useGetAllEmail } from "../../api/email/query"
-import { useParams } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 
 const Inbox = () => {
-    const { id } = useParams()
-    const { data } = useGetAllEmail({ userId: id! })
-    console.log(data)
+    const { state } = useLocation()
+    const { data, isLoading, refetch} = useGetAllEmail({ email: state.email! })
+    if (isLoading)
+        return <Typography>loading...</Typography>
     return <>
         <Grid container height={"40%"}>
             <Grid xs={12} item>
-                <Header />
+                <Header refetch={refetch}/>
             </Grid>
             <Grid xs={3} item>
                 <Side />

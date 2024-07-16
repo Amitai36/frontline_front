@@ -1,10 +1,11 @@
 import axios from "axios";
+import { User } from "./types";
 
 export const login = async ({
     email, password
 }: {
     email: string, password: string
 }) => {
-    const res = axios.post('http://localhost/3000/logIn', { email, password })
+    const res = await axios.post<User>('http://localhost:3000/users/logIn', { email, password })
     return res;
 };

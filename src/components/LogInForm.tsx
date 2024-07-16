@@ -13,7 +13,13 @@ const LogInForm = () => {
     const onClickLogIn = () => {
         logIn.mutate({ email, password }, {
             onSuccess: (data) => {
-                navigate(`/user/${data.data._id}`)
+                const { _id, last_name, name } = data.data
+                navigate(`/user/${_id}`, {
+                    state: {
+                        name: name,
+                        lastName: last_name
+                    }
+                })
 
             },
         })

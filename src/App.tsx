@@ -2,10 +2,11 @@ import { Route, Routes } from "react-router-dom";
 import Inbox from "./pages/inbox/Inbox";
 import LogIn from "./pages/Login";
 import SignUp from "./pages/SignUp";
+import MuiDef from "./theme/MuiDef";
 
 function App() {
   return (
-    <div style={{ width: "100vw" }}>
+    <MuiDef>
       <Routes>
         <Route element={
           <LogIn />
@@ -18,7 +19,7 @@ function App() {
         } path="/user/:id" />
       </Routes>
       {/* <Inbox /> */}
-    </div >
+    </MuiDef>
   )
 }
 

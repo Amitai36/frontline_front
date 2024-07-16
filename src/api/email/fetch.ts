@@ -1,11 +1,12 @@
 import axios from "axios";
+import { Email } from "./types";
 
 export const getAllEmail = async ({
     email,
 }: {
     email: string
 }) => {
-    const res = await axios.get('http://localhost:3000/email/getAllEmails', {
+    const res = await axios.get<Email[]>('http://localhost:3000/email/getAllEmails', {
         params: {
             email
         }

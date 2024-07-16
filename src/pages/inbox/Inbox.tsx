@@ -9,16 +9,16 @@ import { useLocation } from "react-router-dom"
 
 const Inbox = () => {
     const { state } = useLocation()
-    const { data, isLoading, refetch} = useGetAllEmail({ email: state.email! })
-    if (isLoading)
+    const { data, isLoading, refetch } = useGetAllEmail({ email: state.email! })
+    if (isLoading || !data?.data)
         return <Typography>loading...</Typography>
     return <>
         <Grid container height={"40%"}>
             <Grid xs={12} item>
-                <Header refetch={refetch}/>
+                <Header refetch={refetch} />
             </Grid>
             <Grid xs={3} item>
-                <Side />
+                <Side data={data.data} />
             </Grid>
             <Grid xs={9} item>
                 <Content />

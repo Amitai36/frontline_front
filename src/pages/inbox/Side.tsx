@@ -1,12 +1,44 @@
-import { Box, Typography } from "@mui/material"
+import { Avatar, Box, Grid, Typography } from "@mui/material"
+import { Email } from "../../api/email/types"
+import moment from "moment"
 
-const Side = () => {
-    const data = [{ user: "ami", date: "7AM", subject: "לא מספק", data: "popopppppppppppppppp" }]
 
-    return <div style={{ width: "100%" }}>
-        {data.map((row, key) => <Box key={key} bgcolor={"gray"}><Typography variant="h5">{row.user}</Typography>
-            <Typography><Typography>{row.subject}</Typography>   {row.date}</Typography>
-            <Typography>{row.data.slice(0, 20)}...</Typography>
+interface SideProps {
+    data: Email[]
+}
+
+const Side = (props: SideProps) => {
+    const { data } = props
+    return <div >
+        {data.map((row, key) => <Box key={key} sx={{ border: "5px solid black" }}>
+            <Grid container>
+                <Grid xs={2} item>
+                    <Avatar>
+                        {row.from}
+                    </Avatar>
+                </Grid>
+                <Grid xs={7} item container>
+                    <Grid item xs={12}>
+                        {row.from}
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography color={"blue"}>
+                            {row.subject}
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography color={"gray"}>
+                            {row.content}
+                        </Typography>
+                    </Grid>
+                </Grid>
+                <Grid item xs={2}>
+                    <Typography color={"gray"}>
+                        {moment(row.date).format("YYYY/MM/DD HH:mm")}
+                    </Typography>
+
+                </Grid>
+            </Grid>
         </Box>)}
     </div>
 }

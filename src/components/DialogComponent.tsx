@@ -14,6 +14,7 @@ interface DialogComponentProps {
     content: React.ReactNode;
     title: { text: string; color: string };
     whenClose?: () => void;
+    buttonsAction?: React.ReactNode;
 }
 
 export default function DialogComponent(props: DialogComponentProps) {
@@ -22,7 +23,7 @@ export default function DialogComponent(props: DialogComponentProps) {
         open,
         setOpen,
         title: { text, color },
-        whenClose,
+        whenClose, buttonsAction
     } = props;
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
@@ -35,6 +36,9 @@ export default function DialogComponent(props: DialogComponentProps) {
 
     return (
         <Dialog fullScreen={fullScreen} open={open} onClose={handleClose}>
+            <DialogActions>
+                {buttonsAction}
+            </DialogActions>
             <DialogTitle color={color}>{text}</DialogTitle>
             <DialogContent>
                 <DialogContentText>{content}</DialogContentText>

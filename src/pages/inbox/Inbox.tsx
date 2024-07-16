@@ -6,24 +6,25 @@ import Header from "./Header"
 import Content from "./Content"
 import { useGetAllEmail } from "../../api/email/query"
 import { useLocation } from "react-router-dom"
+import { useState } from "react"
 
 const Inbox = () => {
     const { state } = useLocation()
+    const [selectData, setSelectData] = useState<{ from: string, date: string, subject: string, content: string }>()
     const { data, isLoading, refetch } = useGetAllEmail({ email: state.email! })
     if (isLoading || !data?.data)
         return <Typography>loading...</Typography>
-    return <>
-        <Grid container height={"40%"}>
-            <Grid xs={12} item>
-                <Header refetch={refetch} />
-            </Grid>
-            <Grid xs={3} item>
-                <Side data={data.data} />
-            </Grid>
-            <Grid xs={9} item>
-                <Content />
-            </Grid>
+    return <Grid container height={"80%"}>
+        <Grid xs={12} item>
+            <Header refetch={refetch} />
         </Grid>
-    </>
+        <Grid xs={3} item>
+            <Side setSelectData={setSelectData} data={data.data} />
+        </Grid>
+        <Grid xs={9} item>
+            <Content selectData={selectData} />
+        </Grid>
+    </Grid>
+
 }
 export default Inbox

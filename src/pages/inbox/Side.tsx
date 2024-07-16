@@ -4,14 +4,27 @@ import moment from "moment"
 
 
 interface SideProps {
-    data: Email[]
+    data: Email[],
+    setSelectData: React.Dispatch<React.SetStateAction<{
+        from: string;
+        date: string;
+        subject: string;
+        content: string;
+    } | undefined>>
 }
 
 const Side = (props: SideProps) => {
-    const { data } = props
+    const { data, setSelectData } = props
     return <div >
         {data.map((row, key) => <Box key={key} sx={{ border: "5px solid black" }}>
-            <Grid container>
+            <Grid onClick={() => {
+                setSelectData({
+                    content: row.content,
+                    date: moment(row.date).format("YYYY/MM/DD HH:mm"),
+                    from: row.from,
+                    subject: row.subject
+                })
+            }} sx={{ cursor: "pointer" }} container>
                 <Grid xs={2} item>
                     <Avatar>
                         {row.from}
@@ -28,7 +41,7 @@ const Side = (props: SideProps) => {
                     </Grid>
                     <Grid item xs={12}>
                         <Typography color={"gray"}>
-                            {row.content}
+                            {row.content.slice(0, 20)}...
                         </Typography>
                     </Grid>
                 </Grid>

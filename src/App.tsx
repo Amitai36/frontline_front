@@ -3,6 +3,7 @@ import Inbox from "./pages/inbox/Inbox";
 import LogIn from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import MuiDef from "./theme/MuiDef";
+import DraftIndex from "./pages/draft";
 
 function App() {
   return (
@@ -17,8 +18,10 @@ function App() {
         <Route element={
           <Inbox />
         } path="/user/:id" />
+        <Route element={
+          <DraftIndex />
+        } path="/draft/:id" />
       </Routes>
-      {/* <Inbox /> */}
     </MuiDef>
   )
 }

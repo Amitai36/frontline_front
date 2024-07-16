@@ -29,8 +29,8 @@ export default function DialogComponent(props: DialogComponentProps) {
     const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
 
     const handleClose = () => {
-        setOpen?.(false);
         whenClose?.();
+        setOpen?.(false);
     };
 
 

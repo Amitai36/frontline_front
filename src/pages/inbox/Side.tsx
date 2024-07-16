@@ -1,15 +1,14 @@
-import { Avatar, Box, Grid, Typography } from "@mui/material"
-import { Email } from "../../api/email/types"
 import moment from "moment"
+import { Avatar, Box, Grid, Typography } from "@mui/material"
+
+import { Email } from "../../api/email/types"
+import { Draft } from "../../api/draft/types"
 
 
 interface SideProps {
-    data: Email[],
+    data: Email[] | Draft[],
     setSelectData: React.Dispatch<React.SetStateAction<{
-        from: string;
-        date: string;
-        subject: string;
-        content: string;
+        to?: string, from?: string, date: string, subject: string, content: string
     } | undefined>>
 }
 
@@ -21,18 +20,18 @@ const Side = (props: SideProps) => {
                 setSelectData({
                     content: row.content,
                     date: moment(row.date).format("YYYY/MM/DD HH:mm"),
-                    from: row.from,
+                    from: row?.from ?? '',
                     subject: row.subject
                 })
             }} sx={{ cursor: "pointer" }} container>
                 <Grid xs={2} item>
                     <Avatar>
-                        {row.from}
+                        {row?.from ?? ''}
                     </Avatar>
                 </Grid>
                 <Grid xs={7} item container>
                     <Grid item xs={12}>
-                        {row.from}
+                        {row?.from ?? ''}
                     </Grid>
                     <Grid item xs={12}>
                         <Typography color={"blue"}>

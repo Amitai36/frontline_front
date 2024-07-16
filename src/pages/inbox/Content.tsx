@@ -3,10 +3,11 @@ import { Avatar, Box, Grid, Paper, Typography } from "@mui/material"
 
 interface ContentProps {
     selectData: {
-        from: string;
+        from?: string;
         date: string;
         subject: string;
         content: string;
+        to?: string
     } | undefined
 }
 
@@ -18,7 +19,7 @@ const Content = (props: ContentProps) => {
     return <div style={{ marginLeft: "5%" }} >
         <Grid container alignItems={"center"}>
             <Grid item xs={1}>
-                <Avatar>{selectData.from.slice(0, 2)}</Avatar>
+                <Avatar>{selectData?.from ? selectData?.from.slice(0, 2) : selectData.to?.slice(0, 2)!}</Avatar>
 
             </Grid>
             <Grid item xs={1}>

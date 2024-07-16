@@ -5,12 +5,14 @@ interface SearchButtonProps {
     value: string;
     handleSearch: () => void
     setValue: React.Dispatch<React.SetStateAction<string>>
+    disabled: boolean
 }
 
 const SearchButton = (props: SearchButtonProps) => {
-    const { value, handleSearch, setValue } = props
+    const { disabled, value, handleSearch, setValue } = props
     return <>
         <TextField
+            disabled={disabled}
             onKeyDown={(e) => {
                 if (e.code === "Enter") {
                     console.log("search")

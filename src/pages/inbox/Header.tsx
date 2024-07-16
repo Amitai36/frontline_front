@@ -1,21 +1,32 @@
 import { AppBar, Avatar, Button, ButtonGroup, Grid, Toolbar } from "@mui/material"
 import { useLocation } from "react-router-dom"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import SearchButton from "../../components/SearchButton"
 import SendEmail from "../SendEmail"
+import { Email } from "../../api/email/types"
 
 
 interface HeaderProps {
     refetch: () => void
+    emails: Email[]
+    setEmails: React.Dispatch<React.SetStateAction<Email[]>>
 }
 
 const Header = (props: HeaderProps) => {
-    const { refetch } = props
+    const { refetch, emails, setEmails } = props
     const [search, setSearch] = useState('')
     const [sendEmail, setSendEmail] = useState(false)
     const { state: { name, lastName } } = useLocation()
-
+    const handleSearch = () => {
+        const filteringBySubject = emails.filter((email) => email.subject.includes(search))
+        setEmails(filteringBySubject)
+    }
+    useEffect(() => {
+        if (!emails) {
+            refetch()
+        }
+    }, [search])
     return <>
         <AppBar >
             <Toolbar>
@@ -35,7 +46,7 @@ const Header = (props: HeaderProps) => {
                         </ButtonGroup>
                     </Grid>
                     <Grid item xs={6}>
-                        <SearchButton value={search} setValue={setSearch} handleSearch={() => console.log("hi")} />
+                        <SearchButton disabled={!emails} value={search} setValue={setSearch} handleSearch={handleSearch} />
                     </Grid>
                     <Grid item xs={1} width={"100%"}>
                         <Button onClick={() => setSendEmail(prev => !prev)}>new Email</Button>

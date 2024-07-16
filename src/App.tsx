@@ -3,10 +3,9 @@ import Inbox from "./pages/inbox/Inbox";
 import LogIn from "./pages/Login";
 import SendEmail from "./pages/SendEmail"
 import { createTheme, MantineProvider } from '@mantine/core';
+import SignUp from "./pages/SignUp";
 
 function App() {
-  const theme = createTheme({
-  });
   return (
     <div style={{ width: "100vw" }}>
       <Routes>
@@ -14,11 +13,14 @@ function App() {
           <LogIn />
         } path="/logIn" />
         <Route element={
+          <SignUp />
+        } path="/SignUp" />
+        <Route element={
           <Inbox />
         } path="/user/:name" />
       </Routes>
       {/* <Inbox /> */}
-    </div>
+    </div >
   )
 }
 

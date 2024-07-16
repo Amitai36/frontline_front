@@ -1,3 +1,4 @@
+import LogIn from "./pages/Login";
 import SendEmail from "./pages/SendEmail"
 import { createTheme, MantineProvider } from '@mantine/core';
 
@@ -6,7 +7,7 @@ function App() {
   });
   return (
     <div style={{ width: "100vw" }}>
-      <SendEmail />
+      <LogIn />
     </div>
   )
 }

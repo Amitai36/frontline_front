@@ -15,7 +15,6 @@ const SearchButton = (props: SearchButtonProps) => {
             disabled={disabled}
             onKeyDown={(e) => {
                 if (e.code === "Enter") {
-                    console.log("search")
                     handleSearch()
                 }
             }}

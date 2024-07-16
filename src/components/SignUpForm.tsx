@@ -19,7 +19,6 @@ const SignUpForm = () => {
         signUp.mutate({ email, firstName, lastName, password }, {
             onSuccess: (data) => {
                 const { _id, email, last_name, name } = data.data
-                console.log(_id, email, last_name, name)
                 navigate(`/user/${_id}`, {
                     state: {
                         name: name,

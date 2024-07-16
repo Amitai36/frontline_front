@@ -7,7 +7,6 @@ import { Typography } from "@mui/material"
 const DraftIndex = () => {
     const { id } = useParams()
     const { data, isLoading, refetch } = useGetAllDraft({ userId: id! })
-    console.log(data)
     if (!data || isLoading)
         return <Typography>loading...</Typography>
     return (

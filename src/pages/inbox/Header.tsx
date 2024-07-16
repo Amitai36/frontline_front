@@ -36,7 +36,11 @@ const Header = (props: HeaderProps) => {
                 <Grid container>
                     <Grid item xs={4} >
                         <ButtonGroup>
-                            <Button>
+                            <Button onClick={() => navigate(`/user/${id}`, {
+                                state: {
+                                    name, lastName
+                                }
+                            })}>
                                 Inbox
                             </Button>
                             <Button onClick={() => navigate(`/draft/${id}`, {
